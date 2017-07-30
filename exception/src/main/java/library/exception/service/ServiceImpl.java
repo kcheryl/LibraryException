@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -31,7 +33,7 @@ public class ServiceImpl implements IService {
 	}
 
 	public void init() {
-
+		Logger logger = Logger.getLogger("Exception");
 		try {
 			File inputFile = new File("input.xml");
 
@@ -45,7 +47,7 @@ public class ServiceImpl implements IService {
 			project(doc);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.FINEST, e.getMessage(), e);
 		}
 	}
 
@@ -104,15 +106,15 @@ public class ServiceImpl implements IService {
 
 					// if info is already included in the map
 					if (infoMap.containsKey(info)) {
-						Map<String, String> attrMap = new HashMap<String, String>();
+						Map<String, String> attrMap = new HashMap<>();
 						attrMap.put(attrNodeName, attrNodeValue);
 						infoMap.get(info).add(new ActionAttribute(nodeName, attrMap));
 					}
 					// if info is new
 					else {
-						Map<String, String> attrMap = new HashMap<String, String>();
+						Map<String, String> attrMap = new HashMap<>();
 						attrMap.put(attrNodeName, attrNodeValue);
-						List<ActionAttribute> list = new ArrayList<ActionAttribute>();
+						List<ActionAttribute> list = new ArrayList<>();
 						list.add(new ActionAttribute(nodeName, attrMap));
 						infoMap.put(info, list);
 					}
