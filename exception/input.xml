@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<exception_library>
+	<project name = "bank">
+		<module name = "withdraw">
+			<exception type = "java.bank.InsufficientBalanceException">
+				<action>
+					<email to = "a@b.com"/>
+					<sms to = "985027676"/>
+					<log file = "log.txt"/>
+				</action>
+			</exception>
+			<exception type = "java.bank.InvalidAccountException">
+				<action>
+					<email to = "c@d.com"/>
+					<sms to = "9123456"/>
+				</action>
+			</exception>
+		</module>
+		<module name = "deposit">
+			<exception type = "java.bank.InsufficientBalanceException">
+				<action>
+					<sms to = "9654321"/>
+					<email to = "b@n.com"/>
+				</action>
+			</exception>
+			<exception type = "java.bank.InvalidAccountException">
+				<action>
+					<sms to = "911111111"/>
+					<log file = "log2.txt"/>
+				</action>
+			</exception>
+		</module>
+	</project>
+	<project name = "scheduler">
+		<module name = "add">
+			<exception type = "java.scheduler.InvalidNameException">
+				<action>
+					<email to = "e@f.com"/>
+					<sms to = "92222222"/>
+				</action>
+			</exception>
+			<exception type = "java.scheduler.InvalidDateException">
+				<action>
+					<sms to = "9333333"/>
+					<log file = "log3.txt"/>
+				</action>
+			</exception>
+		</module>
+		<module name = "remove">
+			<exception type = "java.scheduler.InvalidNameException">
+				<action>
+					<sms to = "944444"/>
+					<email to = "g@h.com"/>
+				</action>
+			</exception>
+			<exception type = "java.scheduler.InvalidDateException">
+				<action>
+					<email to = "i@j.com"/>
+					<log file = "log4.txt"/>
+				</action>
+			</exception>
+		</module>
+	</project>
+	</exception_library>
