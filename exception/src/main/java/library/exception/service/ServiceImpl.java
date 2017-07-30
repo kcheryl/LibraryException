@@ -23,8 +23,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 
 public class ServiceImpl implements IService {
-	Map<ExceptionInfo, List<ActionAttribute>> infoMap;
-	Logger logger;
+	private Map<ExceptionInfo, List<ActionAttribute>> infoMap;
+	private Logger logger;
 
 	public ServiceImpl() {
 		infoMap = new HashMap<>();

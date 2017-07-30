@@ -10,6 +10,9 @@ import library.exception.service.ServiceImpl;
 
 public class ExcepServiceTest {
 	static IService serv;
+	static final String ACTION_SUCCESS = "Action successfully executed";
+	static final String PROJECT_BANK = "bank";
+	static final String PROJECT_SCHEDULER = "scheduler";
 
 	@BeforeClass
 	public static void setUp() {
@@ -44,8 +47,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testEmailAction() {
 		Exception excep = new Exception("java.bank.InsufficientBalanceException");
-		String result = serv.handleAction("bank", "withdraw", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_BANK, "withdraw", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Sending email to=a@b.com... \n Sending email to=c@d.com...
 	}
@@ -53,8 +56,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testSMSAction() {
 		Exception excep = new Exception("java.bank.InvalidAccountException");
-		String result = serv.handleAction("bank", "deposit", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_BANK, "deposit", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Sending SMS to=911111111... \n Sending SMS to=9666666...
 	}
@@ -62,8 +65,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testLogAction() {
 		Exception excep = new Exception("java.scheduler.InvalidDateException");
-		String result = serv.handleAction("scheduler", "add", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_SCHEDULER, "add", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Logging file=log2.txt... \n Logging file=log3.txt...
 	}
@@ -71,8 +74,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testSMSLogAction() {
 		Exception excep = new Exception("java.scheduler.InvalidNameException");
-		String result = serv.handleAction("scheduler", "remove", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_SCHEDULER, "remove", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Sending SMS to=944444... \n Logging file=log6.txt...
 	}
@@ -80,8 +83,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testEmailLogAction() {
 		Exception excep = new Exception("java.scheduler.InvalidDateException");
-		String result = serv.handleAction("scheduler", "remove", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_SCHEDULER, "remove", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Sending email to=i@j.com... \n Logging file=log4.txt...
 	}
@@ -89,8 +92,8 @@ public class ExcepServiceTest {
 	@Test
 	public void testEmailSMSAction() {
 		Exception excep = new Exception("java.bank.InvalidAccountException");
-		String result = serv.handleAction("bank", "withdraw", excep);
-		String expected = "Action successfully executed";
+		String result = serv.handleAction(PROJECT_BANK, "withdraw", excep);
+		String expected = ACTION_SUCCESS;
 		assertEquals(expected, result);
 		// console - Sending email to=w@e.com... \n Sending SMS to=9123456...
 	}
