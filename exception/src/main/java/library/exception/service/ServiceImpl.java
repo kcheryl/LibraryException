@@ -99,26 +99,29 @@ public class ServiceImpl implements IService {
 				Element childElement = (Element) children.item(k);
 				String nodeName = childElement.getNodeName();
 				NamedNodeMap attributes = childElement.getAttributes();
+				store(info, nodeName, attributes);
+			}
+		}
+	}
 
-				for (int l = 0; l < attributes.getLength(); l++) {
-					String attrNodeName = attributes.item(l).getNodeName();
-					String attrNodeValue = attributes.item(l).getNodeValue();
+	private void store(ExceptionInfo info, String nodeName, NamedNodeMap attributes) {
+		for (int l = 0; l < attributes.getLength(); l++) {
+			String attrNodeName = attributes.item(l).getNodeName();
+			String attrNodeValue = attributes.item(l).getNodeValue();
 
-					// if info is already included in the map
-					if (infoMap.containsKey(info)) {
-						Map<String, String> attrMap = new HashMap<>();
-						attrMap.put(attrNodeName, attrNodeValue);
-						infoMap.get(info).add(new ActionAttribute(nodeName, attrMap));
-					}
-					// if info is new
-					else {
-						Map<String, String> attrMap = new HashMap<>();
-						attrMap.put(attrNodeName, attrNodeValue);
-						List<ActionAttribute> list = new ArrayList<>();
-						list.add(new ActionAttribute(nodeName, attrMap));
-						infoMap.put(info, list);
-					}
-				}
+			// if info is already included in the map
+			if (infoMap.containsKey(info)) {
+				Map<String, String> attrMap = new HashMap<>();
+				attrMap.put(attrNodeName, attrNodeValue);
+				infoMap.get(info).add(new ActionAttribute(nodeName, attrMap));
+			}
+			// if info is new
+			else {
+				Map<String, String> attrMap = new HashMap<>();
+				attrMap.put(attrNodeName, attrNodeValue);
+				List<ActionAttribute> list = new ArrayList<>();
+				list.add(new ActionAttribute(nodeName, attrMap));
+				infoMap.put(info, list);
 			}
 		}
 	}
