@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 
 import library.exception.beans.ActionAttribute;
 import library.exception.beans.ExceptionInfo;
+import library.exception.action.Action;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -23,9 +24,11 @@ import org.w3c.dom.NamedNodeMap;
 
 public class ServiceImpl implements IService {
 	Map<ExceptionInfo, List<ActionAttribute>> infoMap;
+	Logger logger;
 
 	public ServiceImpl() {
 		infoMap = new HashMap<>();
+		logger = Logger.getLogger("Exception");
 	}
 
 	public Map<ExceptionInfo, List<ActionAttribute>> getInfoMap() {
@@ -33,7 +36,6 @@ public class ServiceImpl implements IService {
 	}
 
 	public void init() {
-		Logger logger = Logger.getLogger("Exception");
 		try {
 			File inputFile = new File("input.xml");
 
@@ -124,5 +126,27 @@ public class ServiceImpl implements IService {
 				infoMap.put(info, list);
 			}
 		}
+	}
+
+	public String handleAction(String projName, String modName, Exception exception) {
+		ExceptionInfo info = new ExceptionInfo(projName, modName, exception.getMessage());
+		List<ActionAttribute> attributeList = infoMap.get(info);
+		if (attributeList == null) {
+			return "Error: Invalid exception details";
+		}
+		for (ActionAttribute attribute : attributeList) {
+			String action = attribute.getActionName() + "Action";
+			try {
+				Class<?> c = Class.forName("library.exception.action." + action);
+				Object o = c.newInstance();
+				Action a = (Action) o;
+				a.executeAction(attribute.getAttributeMap());
+			} catch (Exception e) {
+				logger.log(Level.FINEST, e.getMessage(), e);
+				return "Error: Unable to retrieve action";
+			}
+
+		}
+		return "Action successfully executed";
 	}
 }

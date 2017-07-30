@@ -5,27 +5,24 @@
 			<exception type = "java.bank.InsufficientBalanceException">
 				<action>
 					<Email to = "a@b.com"/>
-					<Email to = "c@d.com"/>
 				</action>
 			</exception>
 			<exception type = "java.bank.InvalidAccountException">
 				<action>
-					<Email to = "w@e.com"/>
-					<SMS to = "9123456"/>
+					<Email to = "c@d.com"/>
+					<Email to = "p@e.com"/>
 				</action>
 			</exception>
 		</module>
 		<module name = "deposit">
 			<exception type = "java.bank.InsufficientBalanceException">
 				<action>
-					<SMS to = "9654321"/>
 					<Email to = "b@n.com"/>
 				</action>
 			</exception>
 			<exception type = "java.bank.InvalidAccountException">
 				<action>
-					<SMS to = "911111111"/>
-					<SMS to = "9666666"/>
+					<Email to = "v@y.com"/>
 				</action>
 			</exception>
 		</module>
@@ -35,27 +32,23 @@
 			<exception type = "java.scheduler.InvalidNameException">
 				<action>
 					<Email to = "e@f.com"/>
-					<Log file = "log.txt"/>
 				</action>
 			</exception>
 			<exception type = "java.scheduler.InvalidDateException">
 				<action>
-					<Log file = "log2.txt"/>
-					<Log file = "log3.txt"/>
+					<Email to = "x@y.com"/>
 				</action>
 			</exception>
 		</module>
 		<module name = "remove">
 			<exception type = "java.scheduler.InvalidNameException">
 				<action>
-					<SMS to = "944444"/>
-					<Log file = "log6.txt"/>
+					<Email to = "g@h.com"/>
 				</action>
 			</exception>
 			<exception type = "java.scheduler.InvalidDateException">
 				<action>
 					<Email to = "i@j.com"/>
-					<Log file = "log4.txt"/>
 				</action>
 			</exception>
 		</module>
